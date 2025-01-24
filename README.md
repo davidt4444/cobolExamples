@@ -16,3 +16,4 @@ create payroll.cob with code from example
 cobc -x payroll.cob
 ./payroll
 
+https://x.com/i/grok/share/1dSCrexrTc2vTrqIzP1yanitg
