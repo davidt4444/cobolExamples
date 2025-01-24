@@ -1,0 +1,90 @@
+devise a coding learning exercise for cobol
+Here's a structured learning exercise designed to introduce someone to COBOL programming. This exercise will focus on basic concepts like variable declaration, input/output operations, and simple arithmetic operations, which are fundamental to understanding COBOL:
+
+Exercise: Simple Payroll Calculation
+Objective: 
+Write a COBOL program that calculates the net pay of an employee based on their hours worked and hourly rate. The program should also calculate gross pay, apply a fixed tax rate, and display all calculated values.
+
+Steps:
+
+Setup Your Environment:
+Ensure you have a COBOL compiler installed. There are several options available, including OpenCOBOL (now known as GnuCOBOL) for a free, open-source solution.
+Program Structure:
+Identification Division: 
+cobol
+IDENTIFICATION DIVISION.
+PROGRAM-ID. PAYROLL.
+AUTHOR. YOUR NAME.
+Environment Division: 
+cobol
+ENVIRONMENT DIVISION.
+CONFIGURATION SECTION.
+SOURCE-COMPUTER. YOUR-COMPUTER.
+OBJECT-COMPUTER. YOUR-COMPUTER.
+
+INPUT-OUTPUT SECTION.
+FILE-CONTROL.
+    SELECT OPTIONAL PRINT-FILE ASSIGN TO "PAYROLL.TXT".
+Data Division: Here, you'll define your variables:
+cobol
+DATA DIVISION.
+FILE SECTION.
+FD PRINT-FILE.
+01 PRINT-RECORD PIC X(80).
+
+WORKING-STORAGE SECTION.
+01 EMPLOYEE-DATA.
+    05 NAME PIC X(30).
+    05 HOURS-WORKED PIC 99V99.
+    05 HOURLY-RATE PIC 99V99.
+    05 GROSS-PAY PIC 9(5)V99.
+    05 TAX-RATE PIC V99 VALUE .20.
+    05 TAX-AMOUNT PIC 9(5)V99.
+    05 NET-PAY PIC 9(5)V99.
+Procedure Division: Where the logic of your program resides:
+cobol
+PROCEDURE DIVISION.
+BEGIN.
+    DISPLAY "Enter employee name: ".
+    ACCEPT NAME.
+    DISPLAY "Enter hours worked: ".
+    ACCEPT HOURS-WORKED.
+    DISPLAY "Enter hourly rate: ".
+    ACCEPT HOURLY-RATE.
+
+    COMPUTE GROSS-PAY = HOURS-WORKED * HOURLY-RATE
+    COMPUTE TAX-AMOUNT = GROSS-PAY * TAX-RATE
+    COMPUTE NET-PAY = GROSS-PAY - TAX-AMOUNT
+
+    OPEN OUTPUT PRINT-FILE
+    MOVE "Employee Payroll Report" TO PRINT-RECORD
+    WRITE PRINT-RECORD
+    MOVE SPACES TO PRINT-RECORD
+    STRING "Name: " NAME DELIMITED BY SIZE INTO PRINT-RECORD
+    WRITE PRINT-RECORD
+    STRING "Gross Pay: $" GROSS-PAY DELIMITED BY SIZE INTO PRINT-RECORD
+    WRITE PRINT-RECORD
+    STRING "Tax Amount: $" TAX-AMOUNT DELIMITED BY SIZE INTO PRINT-RECORD
+    WRITE PRINT-RECORD
+    STRING "Net Pay: $" NET-PAY DELIMITED BY SIZE INTO PRINT-RECORD
+    WRITE PRINT-RECORD
+    CLOSE PRINT-FILE
+
+    DISPLAY "Payroll calculated and saved to PAYROLL.TXT".
+    STOP RUN.
+Compile and Run:
+Save the code in a file with a .cob extension, e.g., payroll.cob.
+Compile it using your COBOL compiler. For GnuCOBOL, you might use something like:
+cobc -x payroll.cob
+Run the compiled program:
+./payroll
+Review & Learn:
+Go through the code to understand each part:
+How variables are declared and used in COBOL.
+Basic arithmetic operations.
+Input from the console using ACCEPT and output using DISPLAY.
+File handling in COBOL (opening a file, writing to it, and closing it).
+Extension Exercise:
+Modify the program to handle multiple employees or include overtime pay calculation.
+
+This exercise introduces you to COBOL's syntax, structure, and practical use in a business scenario. Remember, COBOL is very verbose, which is part of its nature due to its origins in business data processing.

@@ -1,0 +1,52 @@
+generate data for this exercise
+Here's some sample data you can use to run through the COBOL payroll exercise:
+
+Employee 1:
+Name: John Doe
+Hours Worked: 40.00
+Hourly Rate: 25.00
+
+Employee 2:
+Name: Jane Smith
+Hours Worked: 35.50
+Hourly Rate: 30.00
+
+Employee 3:
+Name: Alex Johnson
+Hours Worked: 45.00 (let's assume overtime at time-and-a-half for hours over 40)
+Hourly Rate: 22.00
+
+When you run your COBOL program, you'll input this data manually:
+
+For John Doe, you would type:
+"John Doe" for name
+"40.00" for hours worked
+"25.00" for hourly rate
+For Jane Smith:
+"Jane Smith" for name
+"35.50" for hours worked
+"30.00" for hourly rate
+For Alex Johnson, you would need to modify your COBOL program to handle overtime (which wasn't in the original exercise but is included here for an extension):
+"Alex Johnson" for name
+"45.00" for hours worked (with overtime calculation)
+"22.00" for hourly rate
+
+Overtime Calculation Note:
+If you choose to handle overtime, you could modify the COBOL code to calculate regular and overtime pay separately. For example, for Alex Johnson:
+Regular hours: 40 * $22 = $880
+Overtime hours: 5 * $22 * 1.5 = $165 (1.5 times the rate for overtime)
+Total Gross Pay: $880 + $165 = $1045
+
+Here's how you might modify the COMPUTE statements for overtime:
+
+cobol
+IF HOURS-WORKED > 40
+    COMPUTE REGULAR-PAY = 40 * HOURLY-RATE
+    COMPUTE OVERTIME-HOURS = HOURS-WORKED - 40
+    COMPUTE OVERTIME-PAY = OVERTIME-HOURS * HOURLY-RATE * 1.5
+    COMPUTE GROSS-PAY = REGULAR-PAY + OVERTIME-PAY
+ELSE
+    COMPUTE GROSS-PAY = HOURS-WORKED * HOURLY-RATE
+END-IF
+
+This data should give you a good range of scenarios to test your COBOL payroll program, from regular hours to overtime pay. Remember, you'll need to adapt your program slightly for Alex's case if you decide to include overtime calculations.
